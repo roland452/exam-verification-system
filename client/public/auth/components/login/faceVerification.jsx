@@ -65,14 +65,26 @@ const FaceVerification = () => {
         console.log(descriptorArray);
         const response = await axios.post(`${BASE_URL}/api/login/face`, { descriptor: descriptorArray, matric }, { withCredentials: true });
         setStatus(response.data.message);
+        
+        if (!response.data.success) {
+          setTimeout(() => {
+            window.location.href = "/dashboard";
+          }, 1500);
+          setStatus(response.data.message);
+          setIsScanning(false);
+        }
+
         if (response.data.authenticated || response.data.success) {
           setTimeout(() => {
             window.location.href = "/dashboard";
-        }, 1500);
+          }, 1500);
+          setIsScanning(false);
         }
+
+        
         
         setIsScanning(false);
-        console.log(descriptorArray);
+       
         
       } catch (err) {
         // This catches the 'Box.constructor' error and retries the next frame

@@ -117,7 +117,7 @@ const AutoActivityFlipper = () => {
                       {getRelativeTime(current.createdAt)}
                    </span>
                    <span className="w-1 h-1 bg-slate-200 rounded-full"></span>
-                   <span className="text-[9px] font-black text-green-600 uppercase">Live Update</span>
+                   <span className="text-[9px] font-black text-green-600 uppercase">Updates</span>
                 </div>
               </div>
             </motion.div>

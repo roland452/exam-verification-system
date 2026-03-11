@@ -98,7 +98,7 @@ route.post('/api/login/face', async (req, res) => {
              }).json({authenticated: true, message: "Login successful", success: true });
         }
         
-        res.status(401).json({ message: "Face not recognized" });
+        res.status(401).json({ message: "Face not recognized", success: false });
         
     } catch (error) {
         res.status(401).json({ message: "error occured check connection" });
