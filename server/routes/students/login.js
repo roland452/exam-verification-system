@@ -81,7 +81,7 @@ route.post('/api/login/face', async (req, res) => {
         const distance = getFaceDistance(student.faceDescriptor, descriptor);
 
         
-        if (distance < 0.45) { // Threshold: lower means more strict 
+        if (distance < 0.6) { // Threshold: lower means more strict 
             const token = jwt.sign({ 
                 id: student._id,
                 matric: student.matric,
@@ -123,7 +123,7 @@ route.post('/api/exam/face-verification', studentAuth, async (req, res) => {
         // 1. Verify Face Identity
         const distance = getFaceDistance(student.faceDescriptor, descriptor);
         
-        if (distance < 0.45) { 
+        if (distance < 0.6) { 
             // 2. Check if student is already verified for this exam
             const isAlreadyVerified = course.verifiedStudents.includes(matric);
 
