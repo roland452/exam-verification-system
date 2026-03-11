@@ -22,7 +22,8 @@ route.post('/api/student/logout',async (req, res) => {
 
     res.clearCookie('studentToken',{
         httpOnly: true,
-        secure: false,
+        secure: true,
+        sameSite:'none',
     })
 
     res.status(200).json({message:'student logout successful'})
@@ -56,7 +57,11 @@ route.post('/api/login/password', async (req, res) => {
         department: student.department,
         isProfileComplete: student.isProfileComplete
     }, process.env.STUDENT_JWT_SECRET, { expiresIn: '1d' });
-    res.cookie('studentToken', token, { httpOnly: true }).json({message: "Login successfully", success: true, isProfileComplete: student.isProfileComplete });
+    res.cookie('studentToken', token, { 
+        httpOnly: true,
+        secure: true,
+        sameSite:'none',
+     }).json({message: "Login successfully", success: true, isProfileComplete: student.isProfileComplete });
 });
 
 
@@ -86,7 +91,11 @@ route.post('/api/login/face', async (req, res) => {
                 department: student.department,
                 isProfileComplete: student.isProfileComplete
             }, process.env.STUDENT_JWT_SECRET, { expiresIn: '1d' });
-            return res.cookie('studentToken', token, { httpOnly: true }).json({authenticated: true, message: "Login successful", success: true });
+            return res.cookie('studentToken', token, { 
+                httpOnly: true,
+                secure: true,
+                sameSite:'none',
+             }).json({authenticated: true, message: "Login successful", success: true });
         }
         
         res.status(401).json({ message: "Face not recognized" });
@@ -187,7 +196,11 @@ route.post('/api/update-profile', studentAuth, async (req, res) => {
             isProfileComplete: updatedStudent.isProfileComplete
         }, process.env.STUDENT_JWT_SECRET, { expiresIn: '1d' });
 
-        return res.cookie('studentToken', token, { httpOnly: true }).json({ 
+        return res.cookie('studentToken', token, { 
+            httpOnly: true,
+            secure: true,
+            sameSite:'none',
+        }).json({ 
             success: true, 
             message: "Profile Updated Successfully!",
             student: updatedStudent 

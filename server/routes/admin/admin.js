@@ -72,8 +72,8 @@ router.post('/api/admin/login', async (req, res) => {
 
         res.cookie('adminToken', token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'strict',
+            secure: true,
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000
         });
 
@@ -91,8 +91,8 @@ router.post('/api/admin/logout', async (req, res) => {
 
     res.clearCookie('adminToken',{
         httpOnly: true,
-        secure: false,
-        sameSite:'strict',
+        secure: true,
+        sameSite:'none',
     })
 
     res.status(200).json({message:'admin logout successful'})
