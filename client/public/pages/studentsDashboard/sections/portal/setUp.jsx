@@ -5,6 +5,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlineSchool, MdOutlineClass } from "react-icons/md";
 import useToast from '../../../../context/toast';
 import useRefresh from '../../../../context/refresh'
+import KasuIcon from '../../../../../src/assets/kasu_icon.png'
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Setup = () => {
@@ -57,7 +58,7 @@ const Setup = () => {
                 
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <img src="../../../../src/assets/Kaduna State University Official_iddJOb3gD__0.png" alt="KASU" className="w-16 mx-auto mb-2" />
+                    <img src={KasuIcon} alt="KASU" className="w-16 mx-auto mb-2" />
                     <h2 className="text-2xl font-bold text-gray-800">Complete Your Profile</h2>
                     <p className="text-gray-500 text-sm">Enter your academic details</p>
                 </div>

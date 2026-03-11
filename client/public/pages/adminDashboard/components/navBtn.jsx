@@ -8,6 +8,7 @@ import useAdminContext from '../adminContext'
 import axios from 'axios'
 import useRefresh from "../../../context/refresh";
 import useToast from "../../../context/toast";
+import KasuIcon from '../../../../src/assets/kasu_icon.png'
 
 const NavBtn = () => {
 
@@ -58,7 +59,7 @@ const NavBtn = () => {
         <div className="bg-white p-3 rounded-2xl shadow-xl mb-4">
             <img 
                 className='w-16 h-16 object-contain'
-                src="../../../../src/assets/Kaduna State University Official_iddJOb3gD__0.png" 
+                src={KasuIcon}
                 alt="KASU Logo" 
             />
         </div>

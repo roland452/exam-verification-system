@@ -6,9 +6,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import InputComponent from "./inputComponent";
 import AuthButtons from "./buttons/authButtons";
-
 import useLoginContext from "./components/login/context";
-
+import KasuIcon from '../../src/assets/kasu_icon.png'
 
 const AuthComponent = () => {
 
@@ -22,7 +21,7 @@ const AuthComponent = () => {
 
   return (
     <>
-    <div className="flex items-center gap-5 text-l absolute right-[8%] top-[2%] z-50"> 
+    <div className="flex items-center gap-5 text-l absolute right-[8%] top-[2%]"> 
       <Link to={'/admin'} className="font-bold decoration-1  underline cursor-pointer">Admin</Link> 
       <Link to={'/dashboard'} className="font-bold decoration-1 underline cursor-pointer">Dashboard</Link> 
     </div>
@@ -38,7 +37,7 @@ const AuthComponent = () => {
             <div className="bg-white p-3 rounded-2xl shadow-xl mb-4">
               <img 
                   className='w-16 h-16 object-contain'
-                  src="../../src/assets/Kaduna State University Official_iddJOb3gD__0.png" 
+                  src={KasuIcon}
                   alt="KASU Logo" 
                 />
             </div>
