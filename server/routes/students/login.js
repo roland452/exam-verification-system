@@ -81,7 +81,7 @@ route.post('/api/login/face', async (req, res) => {
         const distance = getFaceDistance(student.faceDescriptor, descriptor);
 
         
-        if (distance < 0.6) { // Threshold: lower means more strict 
+        if (distance < 0.35) { // Threshold: lower means more strict 
             const token = jwt.sign({ 
                 id: student._id,
                 matric: student.matric,
