@@ -9,6 +9,7 @@ import axios from 'axios'
 import useRefresh from "../../../context/refresh";
 import useToast from "../../../context/toast";
 import KasuIcon from '../../../../src/assets/kasu_icon.png'
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const NavBtn = () => {
 
@@ -31,7 +32,7 @@ const NavBtn = () => {
   
     async function logOut() {
       setToast('logging out....')
-      const res = await axios.post('/api/admin/logout',
+      const res = await axios.post(`${BASE_URL}/api/admin/logout`,
       { },
       {
         withCredentials: true
