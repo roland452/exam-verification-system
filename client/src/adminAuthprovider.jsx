@@ -32,7 +32,6 @@ const AdminAuthprovider = ({ children }) => {
         
         setIsAuthenticated(data.authenticated || false)
 
-        // Logic: If the API says they aren't authenticated, boot them
         if (!data.authenticated) {
           navigate('/')
         }
@@ -48,13 +47,11 @@ const AdminAuthprovider = ({ children }) => {
     fetchAuth()
   }, [refresh, navigate, setIsAuthenticated, setProfile, setProfileLoading])
 
-  // While checking auth, you might want to show a loader 
-  // so the user doesn't see a flash of private content
+  
   if (profileLoading) {
     return <LoaderAnimation /> 
   }
 
-  // If authenticated, render the app; otherwise, return null (handled by navigate)
   return isAuthenticated ? <> {children} </> : null
 }
 

@@ -79,9 +79,8 @@ const FaceVerify = ({ setStep, setFaceActive, examId }) => {
     <>
       
         <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center bg-[#fffdfddc] dark:bg-[#141313e3] p-8 z-50">
-          <FaArrowLeft className='absolute left-15 cursor-pointer h-7 w-7' onClick={() => setFaceActive(false)} />
+          <FaArrowLeft className='absolute left-5 cursor-pointer h-7 w-7' onClick={() => setFaceActive(false)} />
 
-          <p className='text-bold'>facial verification</p>
           
           <div className="relative w-64 h-64 rounded-full overflow-hidden border-3 border-[#0aaf0a] mb-6 shadow-2xl">
             <video ref={videoRef} autoPlay muted className="w-full h-full object-cover scale-x-[-1]" />

@@ -20,7 +20,7 @@ const NavBtn = () => {
   ]
 
   const navActive = useAdminContext((state) => state.navActive)
-   const setNavActive = useAdminContext((state) => state.setNavActive)
+  const setNavActive = useAdminContext((state) => state.setNavActive)
   const section = useAdminContext((state) => state.adminSection)
   const setSection = useAdminContext((state) => state.setAdminSection)
   const setToast = useToast((state) => state.setToast)
