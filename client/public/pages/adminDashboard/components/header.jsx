@@ -7,7 +7,7 @@ const Header = () => {
   const navActive = useAdminContext((state) => state.navActive)
   const setNavActive = useAdminContext((state) => state.setNavActive)
   return (
-    <div className="text-[20px] p-1 md:hidden absolute left- z-50">
+    <div className="text-[20px] p-2 md:hidden">
       <AiOutlineBars onClick={() => setNavActive(!navActive)}/>
     </div>
   )
