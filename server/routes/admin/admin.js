@@ -55,7 +55,7 @@ router.post('/api/admin/login', async (req, res) => {
 
         // CALCULATE DISTANCE (The Real Logic)
         const distance = calculateDistance(admin.faceDescriptor, descriptor);
-        const threshold = 0.35; // Stricter threshold for Admin
+        const threshold = 0.45; // Stricter threshold for Admin
         console.log(threshold,'threshhold')
 
         if (distance > threshold) {

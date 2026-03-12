@@ -86,7 +86,7 @@ route.post('/api/login/face', async (req, res) => {
         // Debugging: Log this to your terminal to see the gap between you and your brother
         console.log(`Login attempt for ${matric}. Distance: ${distance}`);
 
-        if (distance < 0.35) { 
+        if (distance < 0.45) { 
             const token = jwt.sign({ 
                 id: student._id,
                 matric: student.matric,
@@ -135,7 +135,7 @@ route.post('/api/exam/face-verification', studentAuth, async (req, res) => {
         // 1. Verify Face Identity
         const distance = getFaceDistance(student.faceDescriptor, descriptor);
         
-        if (distance < 0.35) { 
+        if (distance < 0.45) { 
             // 2. Check if student is already verified for this exam
             const isAlreadyVerified = course.verifiedStudents.includes(matric);
 
