@@ -70,18 +70,23 @@ route.post('/api/login/password', async (req, res) => {
 
 
 // --- STRATEGY 3: FACE ID ---
-route.post('/api/login/face', async (req, res) => {
-
-    const { matric, descriptor } = req.body; // Array of 128 numbers from frontend
+Route.post('/api/login/face', async (req, res) => {
+    const { matric, descriptor } = req.body;
 
     try {
         const student = await Student.findOne({ matric });
 
-        // Compare stored descriptor with the new scan
+        // 1. Safety check: Does the student even exist?
+        if (!student || !student.faceDescriptor) {
+            return res.status(404).json({ message: "Student not found or Face ID not enrolled", success: false });
+        }
+
         const distance = getFaceDistance(student.faceDescriptor, descriptor);
 
-        
-        if (distance < 0.6) { // Threshold: lower means more strict 
+        // Debugging: Log this to your terminal to see the gap between you and your brother
+        console.log(`Login attempt for ${matric}. Distance: ${distance}`);
+
+        if (distance < 0.35) { 
             const token = jwt.sign({ 
                 id: student._id,
                 matric: student.matric,
@@ -91,20 +96,27 @@ route.post('/api/login/face', async (req, res) => {
                 department: student.department,
                 isProfileComplete: student.isProfileComplete
             }, process.env.STUDENT_JWT_SECRET, { expiresIn: '1d' });
+
             return res.cookie('studentToken', token, { 
                 httpOnly: true,
-                secure: true,
-                sameSite:'none',
-             }).json({authenticated: true, message: "Login successful", success: true });
+                secure: true, // Requires HTTPS
+                sameSite: 'none',
+            }).json({ authenticated: true, message: "Login successful", success: true });
         }
-        
-        res.status(401).json({ message: "Face not recognized", success: false });
-        
+
+        // 2. If distance is too high, reject
+        res.status(401).json({ 
+            message: "Face not recognized", 
+            success: false,
+            // distance: distance // Uncomment this only during testing!
+        });
+
     } catch (error) {
-        res.status(401).json({ message: "error occured check connection" });
+        console.error("Login Error:", error);
+        res.status(500).json({ message: "An error occurred on the server", success: false });
     }
-   
 });
+
 
 
 
@@ -123,7 +135,7 @@ route.post('/api/exam/face-verification', studentAuth, async (req, res) => {
         // 1. Verify Face Identity
         const distance = getFaceDistance(student.faceDescriptor, descriptor);
         
-        if (distance < 0.6) { 
+        if (distance < 0.35) { 
             // 2. Check if student is already verified for this exam
             const isAlreadyVerified = course.verifiedStudents.includes(matric);
 
