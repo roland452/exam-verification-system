@@ -66,29 +66,25 @@ const FaceVerification = () => {
         const response = await axios.post(`${BASE_URL}/api/login/face`, { descriptor: descriptorArray, matric }, { withCredentials: true });
         setStatus(response.data.message);
         
-        if (!response.data.success) {
+        if (response.data.success) {
           setTimeout(() => {
             window.location.href = "/dashboard";
           }, 1500);
           setStatus(response.data.message);
           setIsScanning(false);
-        }
-
-        if (response.data.authenticated || response.data.success) {
+        } else {
           setTimeout(() => {
-            window.location.href = "/dashboard";
-          }, 1500);
-          setIsScanning(false);
+            setIsScanning(false)
+            setStatus('Position yor face and try again')
+          }, 2000)
         }
 
-        
-        
-        setIsScanning(false);
-       
         
       } catch (err) {
         // This catches the 'Box.constructor' error and retries the next frame
         requestAnimationFrame(runDetection);
+        setStatus('Detection error. please refresh page')
+        setIsScanning(false)
       }
     };
 

@@ -83,6 +83,11 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
                 setFaceEnrollActive(false);
                 window.location.href = "/admin";
             }, 1500);
+        } else {
+          setTimeout(() => {
+              setFaceEnrollActive(false);
+              setStatus(response.data.message || "not recognized");
+          }, 1500);
         }
         
       } catch (err) {
