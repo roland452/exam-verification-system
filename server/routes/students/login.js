@@ -70,7 +70,7 @@ route.post('/api/login/password', async (req, res) => {
 
 
 // --- STRATEGY 3: FACE ID ---
-Route.post('/api/login/face', async (req, res) => {
+route.post('/api/login/face', async (req, res) => {
     const { matric, descriptor } = req.body;
 
     try {
