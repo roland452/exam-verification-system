@@ -54,7 +54,6 @@ router.post('/api/admin/login', async (req, res) => {
         if (!admin) return res.status(404).json({ message: "No admin registered" });
 
         // CALCULATE DISTANCE (The Real Logic)
-        // Standard threshold for face-api.js is 0.6. Lower is a closer match.
         const distance = calculateDistance(admin.faceDescriptor, descriptor);
         const threshold = 0.35; // Stricter threshold for Admin
         console.log(threshold,'threshhold')
