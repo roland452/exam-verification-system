@@ -19,7 +19,7 @@ const FaceVerify = ({ setStep, setFaceActive, examId }) => {
         await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
         await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
         
-        startVideo();
+         startVideo();
         
       } catch (err) {
         setStatus("Error loading models. Check folder location.");

@@ -73,10 +73,10 @@ const FaceVerification = () => {
           setStatus(response.data.message);
           setIsScanning(false);
         } else {
-          setTimeout(() => {
-            setIsScanning(false)
-            setStatus('Position yor face and try again')
-          }, 2000)
+         
+          setIsScanning(false)
+          setStatus('Face unrecognize')
+         
         }
 
         
