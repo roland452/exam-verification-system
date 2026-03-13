@@ -40,6 +40,22 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
     setStatus(mode === "signup" ? "Position face to Log Admin" : "Position face to Login");
   };
 
+  
+  const stopVideo = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const stream = videoRef.current.srcObject;
+      const tracks = stream.getTracks();
+
+      tracks.forEach(track => {
+        track.stop(); // This physically turns off the camera hardware
+      });
+
+      videoRef.current.srcObject = null; // This clears the video element
+      setStatus("Camera closed");
+    }
+  };
+
+
   const handleEnroll = async () => {
     if (isScanning) return; 
     setIsScanning(true);
@@ -76,6 +92,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
 
         setStatus(response.data.message || "Success!");
         setIsScanning(false);
+        stopVideo()
 
         // Redirect or close modal on success
         if (response.data.authenticated || response.data.success) {
@@ -91,6 +108,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
         }
         
       } catch (err) {
+        stopVideo()
         // If it's a transient library error, retry detection
         if (err.message && err.message.includes("Box.constructor")) {
             requestAnimationFrame(runDetection);
@@ -98,6 +116,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
             setStatus(err.response?.data?.message || "Biometric Error");
             setIsScanning(false);
         }
+        
       }
     };
 

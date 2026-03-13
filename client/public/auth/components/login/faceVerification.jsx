@@ -40,6 +40,21 @@ const FaceVerification = () => {
     setStatus("Position your face and click Login");
   };
 
+  const stopVideo = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const stream = videoRef.current.srcObject;
+      const tracks = stream.getTracks();
+
+      tracks.forEach(track => {
+        track.stop(); // This physically turns off the camera hardware
+      });
+
+      videoRef.current.srcObject = null; // This clears the video element
+      setStatus("Camera closed");
+    }
+  };
+
+
   const handleEnroll = async () => {
     if (isScanning) return; // Prevent multiple clicks
     setIsScanning(true);
@@ -65,6 +80,7 @@ const FaceVerification = () => {
         console.log(descriptorArray);
         const response = await axios.post(`${BASE_URL}/api/login/face`, { descriptor: descriptorArray, matric }, { withCredentials: true });
         setStatus(response.data.message);
+        stopVideo()
         
         if (response.data.success) {
           setTimeout(() => {
@@ -83,6 +99,7 @@ const FaceVerification = () => {
       } catch (err) {
         // This catches the 'Box.constructor' error and retries the next frame
         requestAnimationFrame(runDetection);
+        stopVideo()
         setStatus('Detection error. please refresh page')
         setIsScanning(false)
       }

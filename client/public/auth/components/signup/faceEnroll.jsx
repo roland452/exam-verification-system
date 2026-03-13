@@ -31,6 +31,21 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
     setStatus("Position face and click Register");
   };
 
+  const stopVideo = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const stream = videoRef.current.srcObject;
+      const tracks = stream.getTracks();
+
+      tracks.forEach(track => {
+        track.stop(); // This physically turns off the camera hardware
+      });
+
+      videoRef.current.srcObject = null; // This clears the video element
+      setStatus("Camera closed");
+    }
+  };
+
+
   const handleEnroll = async () => {
     if (isScanning) return;
     setIsScanning(true);
@@ -53,9 +68,11 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
         setFaceDescriptor(descriptorArray);
         setStatus("Face captured successfully!");
         setIsScanning(false);
+        stopVideo()
         setTimeout(() => setCam(false), 1000);
         
       } catch (err) {
+        stopVideo()
         requestAnimationFrame(runDetection);
       }
     };
@@ -64,6 +81,7 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
 
   const toggleFaceEnroll = () => {
     setFaceDescriptor('');
+    stopVideo()
     setCam(!cam);
   };
 
