@@ -29,10 +29,28 @@ const StudentFaceVerify = ({ setIsVerifiedProfile, setIsCamOpen, setStep, setMat
   }, []);
 
   const startVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: {} })
+    const constraints = {
+      video: { facingMode: 'environment' }
+    }
+    navigator.mediaDevices.getUserMedia(constraints)
       .then(stream => { videoRef.current.srcObject = stream; })
       .catch(() => setStatus("Camera access denied"));
     setStatus("Position your face and click Register");
+  };
+
+
+  const stopVideo = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const stream = videoRef.current.srcObject;
+      const tracks = stream.getTracks();
+
+      tracks.forEach(track => {
+        track.stop(); // This physically turns off the camera hardware
+      });
+
+      videoRef.current.srcObject = null; // This clears the video element
+      setStatus("Camera closed");
+    }
   };
 
   const handleEnroll = async () => {
@@ -63,6 +81,8 @@ const StudentFaceVerify = ({ setIsVerifiedProfile, setIsCamOpen, setStep, setMat
           setIsVerifiedProfile(response.data.profile || [])
         }
 
+        stopVideo()
+
         setIsCamOpen(false)
         setIsScanning(false);
         console.log(descriptorArray);
@@ -71,6 +91,7 @@ const StudentFaceVerify = ({ setIsVerifiedProfile, setIsCamOpen, setStep, setMat
       } catch (err) {
         requestAnimationFrame(runDetection);
         setStep('failed')
+        stopVideo()
         setIsCamOpen(false)
       }
     };
@@ -78,11 +99,18 @@ const StudentFaceVerify = ({ setIsVerifiedProfile, setIsCamOpen, setStep, setMat
     runDetection();
   };
 
+  const closeCam = () => {
+    stopVideo()
+    setIsCamOpen(false)
+  }
+
+
+
   return (
     <>
       
         <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center bg-[#fffdfddc] dark:bg-[#141313e3] p-8 z-50">
-          <FaArrowLeft className='absolute left-5 cursor-pointer h-7 w-7' onClick={() => setMatric('')} />
+          <FaArrowLeft className='absolute left-5 cursor-pointer h-7 w-7' onClick={() => closeCam()} />
 
           
           <div className="relative w-64 h-64 rounded-full overflow-hidden border-3 border-[#0aaf0a] mb-6 shadow-2xl">
