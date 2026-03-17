@@ -1,7 +1,13 @@
 import express from 'express'
 const route = express.Router();
 import Course from '../../model/admin/course.js'
+import studentAuth from '../../controller/studentAuth.js';
+import Student from '../../model/students/student.js';
 
+
+
+// Helper: Calculate Euclidean distance for Face descriptors
+const getFaceDistance = (desc1, desc2) => Math.sqrt(desc1.reduce((acc, val, i) => acc + Math.pow(val - desc2[i], 2), 0));
 
 
 // @route   GET /api/courses
@@ -81,5 +87,55 @@ route.delete('/api/courses/:id', async (req, res) => {
     res.status(500).json({ message: "Error deleting course" });
   }
 });
+
+
+
+
+
+
+// ---  EXAM FACE VERIFICATION ---
+route.post('/api/admin-exam/face-verification', studentAuth, async (req, res) => {
+    const { descriptor, matric } = req.body; 
+
+    try {
+        const student = await Student.findOne({ matric });
+
+
+        // 1. Verify Face Identity
+        const distance = getFaceDistance(student.faceDescriptor, descriptor);
+        
+        if (distance < 0.45) { 
+           
+            
+            return res.json({ 
+                authenticated: true, 
+                message: "Verification Successful", 
+                success: true,
+                profile:{
+                  id: student._id,
+                  matric: student.matric,
+                  fullName: student.fullName,
+                  course: student.course,
+                  level: student.level,
+                  department: student.department,
+                  isProfileComplete: student.isProfileComplete
+                }
+            });
+        } else {
+            return res.status(401).json({ message: "Face not recognized", success: false }); 
+        }
+        
+    } catch (error) {
+        console.error("Exam Verification Error:", error);
+        res.status(500).json({ message: "An error occurred during verification" });
+    }
+});
+
+
+
+
+
+
+
 
 export default route;
