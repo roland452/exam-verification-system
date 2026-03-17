@@ -94,7 +94,7 @@ route.delete('/api/courses/:id', async (req, res) => {
 
 
 // ---  EXAM FACE VERIFICATION ---
-route.post('/api/admin-exam/face-verification', studentAuth, async (req, res) => {
+route.post('/api/admin-exam/face-verification', async (req, res) => {
     const { descriptor, matric } = req.body; 
 
     try {
