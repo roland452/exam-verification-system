@@ -20,7 +20,8 @@ const Login = ({authSection, setPopup, submitting, setSubmitting}) => {
 
   const [matric, setMatric] = useState('')
   const [password, setPassword] = useState('')
-  const matricRegex = /^kasu\/[a-z]{3}\/[a-z]{3}\/\d{2}\/\d{4}$/i;
+  // Matric format: kasu/22/csc/1072  (kasu / year / dept / number)
+  const matricRegex = /^kasu\/\d{2}\/[a-z]{3}\/\d{4}$/i;
 
   async function apiRequest() {
     setSubmitting(true)
@@ -52,7 +53,7 @@ const Login = ({authSection, setPopup, submitting, setSubmitting}) => {
   
   const handleSubmit = () => {
     if(!matric || !password) return setPopup('input cant be empty')
-    if(!matricRegex.test(matric)) return setPopup('matric is not a valid type')
+    if(!matricRegex.test(matric)) return setPopup('Invalid matric format (KASU/00/XXX/0000)')
     if(password.length < 6) return setPopup('password must be atleast 6 characters')
 
     apiRequest()    

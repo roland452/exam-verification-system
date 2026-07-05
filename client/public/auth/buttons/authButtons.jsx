@@ -1,45 +1,41 @@
 import React from 'react'
-import { FaUserAlt } from "react-icons/fa"; 
-import { FaUserLock } from "react-icons/fa"; 
-import { FaUserAltSlash } from "react-icons/fa"; 
-import { BiLogInCircle } from "react-icons/bi"; 
+import { FaUserAlt, FaUserLock } from "react-icons/fa";
+import { BiLogInCircle } from "react-icons/bi";
 
+const TABS = [
+  { key: 'login', label: 'Login', icon: BiLogInCircle },
+  { key: 'signup', label: 'Sign up', icon: FaUserAlt },
+  { key: 'admin', label: 'Admin', icon: FaUserLock },
+];
 
-const AuthButtons = ({authSection, setAuthSection}) => {
+const AuthButtons = ({ authSection, setAuthSection }) => {
   return (
-        <div className="place-self-center flex gap-10 my-5.5 ark:text-[#d5cece]">
-            <button 
-                className={`w-12 h-12 text-xl place-items-center rounded-full cursor-pointer bg-gray-100 
-                ${
-                    authSection === 'login'? 'bg-green-500 text-white shadow-xl shadow-gray-400 transition-all animate-bounce' 
-                    : 'bg-gray-100'
-                }`
-                }
-                onClick={() => setAuthSection('login')}
-            ><BiLogInCircle /></button>
+    <div className="place-self-center flex items-center gap-1 my-5
+                     bg-gray-100 ark:bg-white/[0.05] rounded-full p-1
+                     border border-gray-200/60 ark:border-white/10">
+      {TABS.map(({ key, label, icon: Icon }) => {
+        const active = authSection === key
+        const isAdmin = key === 'admin'
 
-            <button 
-                className={`w-12 h-12 text-xl place-items-center rounded-full cursor-pointer 
-                ${
-                    authSection === 'signup'? ' bg-green-900 text-white shadow-xl shadow-gray-400 transition-all animate-bounce' 
-                    : 'bg-gray-100'
-                }`
-                }
-                value={'signup'}
-                onClick={() => setAuthSection('signup')}
-            ><FaUserAlt /></button>
-
-            <button 
-                className={`w-12 h-12 text-xl place-items-center rounded-full cursor-pointer bg-gray-100 
-                ${
-                    authSection === 'admin'? 'bg-red-500 text-white shadow-xl shadow-gray-400 transition-all animate-bounce' 
-                    : 'bg-gray-100'
-                }`
-                }
-                value={'admin'}
-                onClick={() => setAuthSection('admin')}
-            ><FaUserLock /></button>
-        </div>
+        return (
+          <button
+            key={key}
+            onClick={() => setAuthSection(key)}
+            className={`relative flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full
+                        text-sm font-semibold cursor-pointer transition-all duration-300
+                        ${active
+                          ? isAdmin
+                            ? 'bg-green-400 text-white shadow-lg shadow-green-500/25'
+                            : 'bg-green-900 text-white shadow-lg shadow-green-900/25'
+                          : 'text-gray-500 ark:text-gray-400 hover:text-gray-700 ark:hover:text-gray-200 hover:bg-white/60 ark:hover:bg-white/5'
+                        }`}
+          >
+            <Icon size={16} />
+            <span className="hidden sm:inline">{label}</span>
+          </button>
+        )
+      })}
+    </div>
   )
 }
 

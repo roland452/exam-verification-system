@@ -1,27 +1,30 @@
 import React from 'react'
 import { useState } from "react";
+import { TbFaceId } from "react-icons/tb";
 import FaceEnroll from '../components/admin/faceEnroll';
 
 const Admin = ({ authSection }) => {
 
  const [faceEnrollActive, setFaceEnrollActive] = useState(false)
 
-  
-    
   return (
-    <div className={`${authSection === 'admin'? 'flex flex-col gap-4' : 'hidden'}`}>
-
+    <div className={`${authSection === 'admin'? 'flex flex-col items-center gap-4 w-full max-w-md mx-auto p-4' : 'hidden'}`}>
 
       <FaceEnroll faceEnrollActive={faceEnrollActive} setFaceEnrollActive={setFaceEnrollActive} />
 
-      <h1 className="py-2.5 text-center">
-        <span className='text-[15px] text-black/50'> click to open facial verification </span>  
-      </h1>
-      
-      <button 
-        className="px-25.5 py-2.5 md:px-45.5 bg-red-500 rounded-4xl cursor-pointer text-[#ffffff] shadow-[0px_0px_15px_3px] ark:shadow-[#1a1a1a] shadow-[#a6a3a3]"
+      <p className="text-center text-sm text-gray-400 ark:text-gray-500">
+        Tap below to open facial verification
+      </p>
+
+      <button
+        className="w-full py-3.5 rounded-full cursor-pointer font-semibold
+                  bg-green-400 text-white shadow-lg shadow-green-500/25
+                   flex items-center justify-center gap-2
+                   transition-all active:scale-95"
         onClick={() => setFaceEnrollActive(!faceEnrollActive)}
-      > Verify faceId </button>
+      >
+        <TbFaceId size={18}/> Verify Face ID
+      </button>
     </div>
   )
 }

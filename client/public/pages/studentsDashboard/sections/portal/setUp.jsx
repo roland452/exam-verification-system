@@ -53,88 +53,162 @@ const Setup = () => {
     };
 
     return (
-        <div className={`absolute w-full min-h-screen flex items-center justify-center p-0 font-sans`}>
-            <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden p-8">
-                
+        <div className="absolute w-full min-h-screen flex items-center justify-center p-4 font-sans" style={{ background: '#0F2B1D' }}>
+            <div
+                className="w-full max-w-md rounded-[1.75rem] shadow-2xl overflow-hidden p-9 relative"
+                style={{ background: '#FBF8F2' }}
+            >
+                {/* Corner seal accent */}
+                <div
+                    className="absolute top-0 right-0 w-24 h-24 opacity-[0.06] pointer-events-none"
+                    style={{
+                        background: 'radial-gradient(circle at top right, #A9822F 0%, transparent 70%)'
+                    }}
+                />
+
                 {/* Header */}
-                <div className="text-center mb-8">
-                    <img src={KasuIcon} alt="KASU" className="w-16 mx-auto mb-2" />
-                    <h2 className="text-2xl font-bold text-gray-800">Complete Your Profile</h2>
-                    <p className="text-gray-500 text-sm">Enter your academic details</p>
+                <div className="text-center mb-7">
+                    <img src={KasuIcon} alt="KASU" className="w-14 mx-auto mb-4" />
+                    <p
+                        className="text-[10px] font-bold uppercase tracking-[0.25em] mb-2"
+                        style={{ color: '#A9822F' }}
+                    >
+                        Student Registry
+                    </p>
+                    <h2
+                        className="text-[1.65rem] leading-tight font-semibold"
+                        style={{ color: '#1C1712', fontFamily: 'Georgia, "Source Serif 4", serif' }}
+                    >
+                        Complete your profile
+                    </h2>
+                    <div className="flex items-center justify-center gap-2 mt-3 mb-1">
+                        <span className="h-px w-8" style={{ background: '#A9822F' }} />
+                        <span className="h-1 w-1 rounded-full" style={{ background: '#A9822F' }} />
+                        <span className="h-px w-8" style={{ background: '#A9822F' }} />
+                    </div>
+                    <p className="text-sm mt-2" style={{ color: '#8A8175' }}>
+                        We need a few academic details to set up your account
+                    </p>
                 </div>
 
-                <div className="space-y-5">
+                <div className="space-y-6">
                     {/* Full Name */}
-                    <div className="relative border-b-2 border-gray-100 py-2 focus-within:border-green-600 transition-colors">
-                        <FiUser className="absolute left-0 top-3 text-gray-400" />
-                        <input 
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            className="w-full pl-8 pr-4 bg-transparent outline-none text-gray-700 placeholder-gray-400" 
-                            placeholder="Full Name" 
-                        />
+                    <div>
+                        <label
+                            className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2 block"
+                            style={{ color: '#8A8175' }}
+                        >
+                            Full Name
+                        </label>
+                        <div
+                            className="relative flex items-center border-b-2 py-2.5 transition-colors"
+                            style={{ borderColor: '#E4DCC9' }}
+                        >
+                            <FiUser className="mr-3 shrink-0" style={{ color: '#A9822F' }} />
+                            <input
+                                name="fullName"
+                                value={formData.fullName}
+                                onChange={handleChange}
+                                className="w-full bg-transparent outline-none text-[15px]"
+                                style={{ color: '#1C1712' }}
+                                placeholder="e.g. Amina Yusuf"
+                            />
+                        </div>
                     </div>
 
                     {/* Email */}
-                    <div className="relative border-b-2 border-gray-100 py-2 focus-within:border-green-600 transition-colors">
-                        <HiOutlineMail className="absolute left-0 top-3 text-gray-400" />
-                        <input 
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full pl-8 pr-4 bg-transparent outline-none text-gray-700 placeholder-gray-400" 
-                            placeholder="University Email" 
-                        />
+                    <div>
+                        <label
+                            className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2 block"
+                            style={{ color: '#8A8175' }}
+                        >
+                            University Email
+                        </label>
+                        <div
+                            className="relative flex items-center border-b-2 py-2.5 transition-colors"
+                            style={{ borderColor: '#E4DCC9' }}
+                        >
+                            <HiOutlineMail className="mr-3 shrink-0" style={{ color: '#A9822F' }} />
+                            <input
+                                name="email"
+                                type="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-full bg-transparent outline-none text-[15px]"
+                                style={{ color: '#1C1712' }}
+                                placeholder="you@kasu.edu.ng"
+                            />
+                        </div>
                     </div>
 
                     {/* Course Selection */}
-                    <div className="relative border-b-2 border-gray-100 py-2 focus-within:border-green-600 transition-colors flex items-center">
-                        <MdOutlineSchool className="text-gray-400 mr-3 text-xl" />
-                        <select 
-                            name="course"
-                            value={formData.course}
-                            onChange={handleChange}
-                            className="w-full bg-transparent outline-none text-gray-700 appearance-none cursor-pointer"
+                    <div>
+                        <label
+                            className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2 block"
+                            style={{ color: '#8A8175' }}
                         >
-                            <option value="">Select Course</option>
-                            <option value="Computer Science">Computer Science</option>
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="Cyber Security">Cyber Security</option>
-                            <option value="Software Engineering">Software Engineering</option>
-                        </select>
+                            Course of Study
+                        </label>
+                        <div
+                            className="relative flex items-center border-b-2 py-2.5 transition-colors"
+                            style={{ borderColor: '#E4DCC9' }}
+                        >
+                            <MdOutlineSchool className="mr-3 shrink-0 text-lg" style={{ color: '#A9822F' }} />
+                            <select
+                                name="course"
+                                value={formData.course}
+                                onChange={handleChange}
+                                className="w-full bg-transparent outline-none text-[15px] appearance-none cursor-pointer"
+                                style={{ color: formData.course ? '#1C1712' : '#8A8175' }}
+                            >
+                                <option value="">Select course</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Cyber Security">Cyber Security</option>
+                                <option value="Software Engineering">Software Engineering</option>
+                            </select>
+                        </div>
                     </div>
 
                     {/* Level Selection */}
                     <div>
-                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 block">Current Level</label>
+                        <label
+                            className="text-[10px] font-bold uppercase tracking-[0.18em] mb-3 block"
+                            style={{ color: '#8A8175' }}
+                        >
+                            Current Level
+                        </label>
                         <div className="flex gap-2">
-                            {['100', '200', '300', '400'].map((lvl) => (
-                                <button
-                                    key={lvl}
-                                    type="button"
-                                    onClick={() => setFormData({...formData, level: lvl})}
-                                    className={`flex-1 py-2 rounded-xl border text-sm font-bold transition-all ${
-                                        formData.level === lvl 
-                                        ? 'bg-green-700 text-white border-green-700 shadow-md scale-105' 
-                                        : 'bg-white text-gray-500 border-gray-200 hover:border-green-300'
-                                    }`}
-                                >
-                                    {lvl}
-                                </button>
-                            ))}
+                            {['100', '200', '300', '400'].map((lvl) => {
+                                const active = formData.level === lvl;
+                                return (
+                                    <button
+                                        key={lvl}
+                                        type="button"
+                                        onClick={() => setFormData({ ...formData, level: lvl })}
+                                        className="flex-1 py-2.5 rounded-xl text-sm font-bold transition-all border"
+                                        style={
+                                            active
+                                                ? { background: '#123524', color: '#F3E9CF', borderColor: '#123524' }
+                                                : { background: 'transparent', color: '#8A8175', borderColor: '#E4DCC9' }
+                                        }
+                                    >
+                                        {lvl}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
 
                 {/* Save Button */}
-                <button 
+                <button
                     onClick={handleSaveProfile}
                     disabled={loading}
-                    className="w-full mt-10 bg-green-800 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-green-700 transition-all active:scale-95 disabled:bg-gray-400"
+                    className="w-full mt-10 py-4 rounded-2xl font-bold text-[13px] uppercase tracking-[0.14em] shadow-lg transition-all active:scale-[0.98] disabled:opacity-50"
+                    style={{ background: '#123524', color: '#F3E9CF' }}
                 >
-                    {loading ? "Saving..." : "Save Profile"}
+                    {loading ? "Saving…" : "Save Profile"}
                 </button>
             </div>
         </div>

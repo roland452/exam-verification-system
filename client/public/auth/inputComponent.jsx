@@ -19,7 +19,7 @@ const InputComponent = ({ authSection }) => {
   }
 
   return (
-    <div className='h-full place-self-center'> 
+    <div className='h-full w-86 place-self-center flex flex-col  px-5 md:px-8'> 
       <Login 
         authSection={authSection}
         setPopup={setPopup}

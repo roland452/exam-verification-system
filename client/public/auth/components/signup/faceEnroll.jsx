@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import * as faceapi from 'face-api.js';
 import { FaArrowLeft } from 'react-icons/fa';
-import { TbFaceId } from "react-icons/tb"; 
+import { TbFaceId } from "react-icons/tb";
 
 
 const FaceEnroll = ({ setFaceDescriptor }) => {
@@ -16,7 +16,7 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
         await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
         await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
         await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
-        if(cam) startVideo();
+        if (cam) startVideo();
       } catch (err) {
         setStatus("Error loading models. Check /public/models.");
       }
@@ -32,17 +32,15 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
   };
 
   const stopVideo = () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      const stream = videoRef.current.srcObject;
-      const tracks = stream.getTracks();
+    const stream = videoRef.current.srcObject;
+    const tracks = stream.getTracks();
 
-      tracks.forEach(track => {
-        track.stop(); // This physically turns off the camera hardware
-      });
+    tracks.forEach(track => {
+      track.stop();
+    });
 
-      videoRef.current.srcObject = null; // This clears the video element
-      setStatus("Camera closed");
-    }
+    videoRef.current.srcObject = null;
+    setStatus("Camera closed");
   };
 
 
@@ -54,11 +52,10 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
     const runDetection = async () => {
       try {
         const detection = await faceapi.detectSingleFace(
-          videoRef.current, 
+          videoRef.current,
           new faceapi.TinyFaceDetectorOptions({ inputSize: 512, scoreThreshold: 0.4 })
         ).withFaceLandmarks().withFaceDescriptor();
 
-        // VALIDATION: Prevents the Box.constructor error
         if (!detection || !detection.detection || !detection.detection.box) {
           requestAnimationFrame(runDetection);
           return;
@@ -70,7 +67,7 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
         setIsScanning(false);
         stopVideo()
         setTimeout(() => setCam(false), 1000);
-        
+
       } catch (err) {
         stopVideo()
         requestAnimationFrame(runDetection);
@@ -87,44 +84,54 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
 
   return (
     <>
-      { cam ? (
-        <div className="fixed inset-0 flex flex-col items-center justify-center bg-white/95 dark:bg-zinc-950/95 p-8 z-50 backdrop-blur-md">
-          <FaArrowLeft className='absolute left-10 top-10 w-7 h-7 cursor-pointer text-zinc-800 dark:text-white' onClick={() => toggleFaceEnroll()} />
-          
+      {cam ? (
+        <div className="fixed inset-0 flex flex-col items-center justify-center
+                         bg-white/95 ark:bg-[#030813]/95 backdrop-blur-md p-8 z-50">
+          <button
+            onClick={toggleFaceEnroll}
+            className="absolute left-6 top-6 w-10 h-10 rounded-full flex items-center justify-center
+                       bg-gray-100 ark:bg-white/5 text-gray-600 ark:text-gray-300
+                       hover:bg-gray-200 ark:hover:bg-white/10 transition-colors"
+          >
+            <FaArrowLeft size={16} />
+          </button>
+
           <div className="relative mb-6">
-            {/* Consistent Admin-style Ring */}
-            <div className={`absolute -inset-4 border-2 border-dashed rounded-full ${isScanning ? 'border-green-500 animate-spin-slow' : 'border-zinc-300 opacity-20'}`}></div>
-            
-            <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-[#0aaf0a] shadow-2xl">
-                <video ref={videoRef} autoPlay muted className="w-full h-full object-cover scale-x-[-1]" />
-                {isScanning && (
-                    <div className="absolute top-0 left-0 w-full h-1 bg-[#0aaf0a] shadow-[0_0_15px_#0aaf0a] animate-scanline"></div>
-                )}
+            <div className={`absolute -inset-3 rounded-full border-2 border-dashed transition-opacity
+              ${isScanning ? 'border-green-900 ark:border-emerald-400 animate-[spin_8s_linear_infinite]' : 'border-gray-200 ark:border-white/10 opacity-40'}`} />
+
+            <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-green-900 ark:border-emerald-400 shadow-2xl shadow-green-900/20">
+              <video ref={videoRef} autoPlay muted className="w-full h-full object-cover scale-x-[-1]" />
+              {isScanning && (
+                <div className="absolute left-0 w-full h-0.5 bg-green-900 ark:bg-emerald-400 shadow-[0_0_15px_rgba(6,78,59,0.6)] animate-[scanline_2s_linear_infinite]" />
+              )}
             </div>
           </div>
 
-          <p className="text-gray-500 dark:text-gray-300 mb-6 font-bold text-center max-w-xs">{status}</p>
-          <button 
+          <p className="text-gray-500 ark:text-gray-400 mb-6 font-medium text-center max-w-xs">{status}</p>
+          <button
             onClick={handleEnroll}
             disabled={isScanning}
-            className={`px-10 py-4 rounded-2xl font-black uppercase text-[11px] tracking-widest transition-all shadow-xl
-                ${isScanning ? 'bg-zinc-200 text-zinc-400' : 'bg-[#0aaf0a] text-white active:scale-95'}
-            `}
+            className={`px-10 py-3.5 rounded-full font-semibold text-white shadow-lg transition-all active:scale-95
+              ${isScanning ? 'bg-gray-300 ark:bg-white/10 shadow-none' : 'bg-green-900 shadow-green-900/25 hover:shadow-xl hover:shadow-green-900/30'}`}
           >
             {isScanning ? "Processing..." : "Register My Face"}
           </button>
         </div>
       ) : (
-        <button className='flex items-center justify-center border-2 border-green-400 text-white w-16 h-11 rounded-full bg-green-900 mx-auto' onClick={() => toggleFaceEnroll()}> 
-            <TbFaceId size={24}/> 
+        <button
+          className="flex items-center justify-center gap-2 border border-green-900/20 ark:border-emerald-400/20
+                     text-green-900 ark:text-emerald-400 bg-green-900/5 ark:bg-emerald-400/10
+                     px-6 h-11 rounded-full mx-auto font-semibold text-sm
+                     hover:bg-green-900/10 ark:hover:bg-emerald-400/20 transition-colors"
+          onClick={toggleFaceEnroll}
+        >
+          <TbFaceId size={20} /> Enroll Face ID
         </button>
       )}
 
-      <style jsx>{`
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-        .animate-scanline { position: absolute; animation: scan 2s linear infinite; }
-        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+      <style>{`
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
       `}</style>
     </>
   );
