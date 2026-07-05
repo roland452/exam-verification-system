@@ -23,7 +23,7 @@ const Admin = ({ authSection }) => {
                    transition-all active:scale-95"
         onClick={() => setFaceEnrollActive(!faceEnrollActive)}
       >
-        <TbFaceId size={18}/> Verify Face ID
+      go to verification 
       </button>
     </div>
   )

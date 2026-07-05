@@ -32,15 +32,17 @@ const FaceEnroll = ({ setFaceDescriptor }) => {
   };
 
   const stopVideo = () => {
-    const stream = videoRef.current.srcObject;
-    const tracks = stream.getTracks();
+    if (videoRef.current && videoRef.current.srcObject) {
+      const stream = videoRef.current.srcObject;
+      const tracks = stream.getTracks();
 
-    tracks.forEach(track => {
-      track.stop();
-    });
+      tracks.forEach(track => {
+        track.stop();
+      });
 
-    videoRef.current.srcObject = null;
-    setStatus("Camera closed");
+      videoRef.current.srcObject = null;
+      setStatus("Camera closed");
+    }
   };
 
 
