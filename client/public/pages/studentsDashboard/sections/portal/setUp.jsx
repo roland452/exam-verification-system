@@ -69,29 +69,20 @@ const Setup = () => {
                 {/* Header */}
                 <div className="text-center mb-7">
                     <img src={KasuIcon} alt="KASU" className="w-14 mx-auto mb-4" />
-                    <p
-                        className="text-[10px] font-bold uppercase tracking-[0.25em] mb-2"
-                        style={{ color: '#A9822F' }}
-                    >
-                        Student Registry
-                    </p>
                     <h2
                         className="text-[1.65rem] leading-tight font-semibold"
                         style={{ color: '#1C1712', fontFamily: 'Georgia, "Source Serif 4", serif' }}
                     >
-                        Complete your profile
+                        Modify Your profile
                     </h2>
                     <div className="flex items-center justify-center gap-2 mt-3 mb-1">
                         <span className="h-px w-8" style={{ background: '#A9822F' }} />
                         <span className="h-1 w-1 rounded-full" style={{ background: '#A9822F' }} />
                         <span className="h-px w-8" style={{ background: '#A9822F' }} />
                     </div>
-                    <p className="text-sm mt-2" style={{ color: '#8A8175' }}>
-                        We need a few academic details to set up your account
-                    </p>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-4">
                     {/* Full Name */}
                     <div>
                         <label
