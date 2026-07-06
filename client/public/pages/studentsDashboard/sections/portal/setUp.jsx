@@ -73,7 +73,7 @@ const Setup = () => {
                         className="text-[1.65rem] leading-tight font-semibold"
                         style={{ color: '#1C1712', fontFamily: 'Georgia, "Source Serif 4", serif' }}
                     >
-                        Modify Your profile
+                       profile
                     </h2>
                     <div className="flex items-center justify-center gap-2 mt-3 mb-1">
                         <span className="h-px w-8" style={{ background: '#A9822F' }} />
