@@ -6,7 +6,11 @@ const AdminSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    // This stores the 128-float array from face-api.js
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     faceDescriptor: {
         type: [Number],
         required: true
