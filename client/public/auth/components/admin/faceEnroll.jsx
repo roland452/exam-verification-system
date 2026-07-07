@@ -3,14 +3,10 @@ import * as faceapi from 'face-api.js';
 import axios from 'axios';
 import { FaArrowLeft } from 'react-icons/fa';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-/**
- * Full implementation fixing "Box.constructor" error and
- * aligning with Admin Schema/Auth routes.
- *
- * Now supports two auth methods, toggled via `authMethod`:
- *  - "face"  → existing face-api.js scan flow
- *  - "email" → plain email + password form
- */
+
+
+
+
 const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "login" }) => {
 
   const videoRef = useRef();
@@ -82,11 +78,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "login" }) =
           new faceapi.TinyFaceDetectorOptions({ inputSize: 512, scoreThreshold: 0.4 })
         ).withFaceLandmarks().withFaceDescriptor();
 
-        /**
-         * THE FIX FOR "Box.constructor" ERROR:
-         * We verify 'detection.detection' exists. If face-api returns a
-         * malformed box, this skips the frame instead of crashing.
-         */
+        
         if (!detection || !detection.detection || !detection.detection.box) {
           requestAnimationFrame(runDetection);
           return;

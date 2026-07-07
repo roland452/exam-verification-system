@@ -116,6 +116,7 @@ router.post('/api/admin/signup-email', async (req, res) => {
     }
 });
 
+
 // @route   POST /api/admin/login-email
 router.post('/api/admin/login-email', async (req, res) => {
     try {
@@ -132,7 +133,7 @@ router.post('/api/admin/login-email', async (req, res) => {
 
         const isMatch = await bcrypt.compare(password, admin.password);
         if (!isMatch) {
-            return res.status(401).json({ authenticated: false, message: "Invalid email or password" });
+            return res.status(401).json({ authenticated: false, message: `${admin, 'Invalid email or password'}` });
         }
 
         issueAdminToken(res, admin);
@@ -143,6 +144,7 @@ router.post('/api/admin/login-email', async (req, res) => {
         console.log(error);
     }
 });
+
 
 
 router.post('/api/admin/logout', async (req, res) => {
