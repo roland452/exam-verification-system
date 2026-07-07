@@ -23,7 +23,7 @@ const Admin = ({ authSection }) => {
                    transition-all active:scale-95"
         onClick={() => setFaceEnrollActive(!faceEnrollActive)}
       >
-      go to verification 
+      Get Access 
       </button>
     </div>
   )

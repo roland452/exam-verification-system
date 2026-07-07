@@ -7,7 +7,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 
-const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "login" }) => {
+const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) => {
 
   const videoRef = useRef();
   const [status, setStatus] = useState("Loading AI Models...");
@@ -178,7 +178,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "login" }) =
         <div className="fixed inset-0 flex flex-col items-center justify-center bg-white/95 dark:bg-zinc-900/95 z-50 backdrop-blur-md p-8">
 
          <FaArrowLeft
-            className='absolute top-10 left-10 cursor-pointer h-7 w-7 text-zinc-700 dark:text-white hover:scale-110 transition-transform'
+            className='absolute top-6 left-6 cursor-pointer h-5 w-5 text-zinc-700 dark:text-white hover:scale-110 transition-transform'
             onClick={handleClose}
          />
 

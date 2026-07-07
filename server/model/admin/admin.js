@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const AdminSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        default: 'admin'
     },
     email: {
         type: String,
@@ -11,7 +11,8 @@ const AdminSchema = new mongoose.Schema({
     },
     faceDescriptor: {
         type: [Number],
-        required: true
+        required: true,
+        default: []
     }
 }, { timestamps: true }); 
 
