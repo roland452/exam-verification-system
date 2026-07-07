@@ -113,6 +113,8 @@ router.post('/api/admin/signup-email', async (req, res) => {
             return res.status(400).json({ message: "That email is already in use" });
         }
         res.status(500).json({ message: "Signup failed" });
+        console.log(error);
+        
     }
 });
 
