@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bycrpt from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import Admin from '../../model/admin/admin.js';
 import adminAuth from '../../controller/adminAuth.js';
 const router = express.Router();
@@ -111,8 +111,7 @@ router.post('/api/admin/signup-email', async (req, res) => {
             return res.status(400).json({ message: "That email is already in use" });
         }
         res.status(500).json({ message: "Signup failed" });
-       
-        
+
     }
 });
 
