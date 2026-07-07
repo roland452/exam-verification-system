@@ -126,7 +126,6 @@ router.post('/api/admin/login-email', async (req, res) => {
         }
 
         const admin = await Admin.findOne({ email });
-        console.log(admin);
         
         if (!admin || !admin.password) {
             return res.status(401).json({ authenticated: false, message: `${admin, 'Invalid email or password'}` });
