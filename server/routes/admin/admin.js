@@ -128,7 +128,7 @@ router.post('/api/admin/login-email', async (req, res) => {
 
         const admin = await Admin.findOne({ email });
         if (!admin || !admin.password) {
-            return res.status(401).json({ authenticated: false, message: "Invalid email or password" });
+            return res.status(401).json({ authenticated: false,message: `${admin, 'Invalid email or password'}` });
         }
 
         const isMatch = await bcrypt.compare(password, admin.password);
