@@ -94,9 +94,6 @@ router.post('/api/admin/signup-email', async (req, res) => {
             return res.status(400).json({ message: "Email and password are required" });
         }
 
-        // const adminCount = await Admin.countDocuments();
-        // if (adminCount > 0) return res.status(400).json({ message: "Admin already registered" });
-
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newAdmin = new Admin({
@@ -108,12 +105,13 @@ router.post('/api/admin/signup-email', async (req, res) => {
         await newAdmin.save();
         res.status(201).json({ success: true, message: "Admin created" });
     } catch (error) {
+        console.log(error);
         // Handles a unique-index violation if `email` is set to unique in the schema
         if (error.code === 11000) {
             return res.status(400).json({ message: "That email is already in use" });
         }
         res.status(500).json({ message: "Signup failed" });
-        console.log(error);
+       
         
     }
 });
