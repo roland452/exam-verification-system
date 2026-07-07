@@ -26,13 +26,13 @@ const AuthComponent = () => {
     <div className="flex items-center gap-1 absolute right-4 top-4 md:right-8 md:top-8 z-20 bg-white/70 ark:bg-white/[0.06] backdrop-blur-xl border border-black/5 ark:border-white/10 rounded-full p-1 shadow-lg shadow-black/5">
       <Link
         to={'/admin'}
-        className="flex items-center gap-1.5 font-semibold text-sm px-4 py-2 rounded-full bg-green-400 text-white shadow-lg shadow-green-500/25 transition-colors"
+        className={`flex items-center gap-1.5 font-semibold text-sm px-4 py-2 rounded-full ${authSection === 'admin'? 'bg-green-400  text-white  shadow-lg shadow-green-500/25' : 'text-black'} transition-colors`}
       >
         <FaUserShield size={16}/> 
       </Link>
       <Link
         to={'/dashboard'}
-        className="flex items-center gap-1.5 font-semibold text-sm px-4 py-2 rounded-full text-gray-600 ark:text-gray-300 hover:bg-black/5 ark:hover:bg-white/10 hover:text-green-900 ark:hover:text-emerald-400 transition-colors"
+        className={`flex items-center gap-1.5 font-semibold text-sm px-4 py-2 rounded-full ${authSection !== 'admin'? 'bg-green-900  text-white  shadow-lg shadow-green-900/25' : 'text-black'}  ark:text-gray-300 hover:bg-black/5 ark:hover:bg-white/10 hover:text-green-900 ark:hover:text-emerald-400 transition-colors`}
       >
         <FaUserGraduate size={14}/> 
       </Link>

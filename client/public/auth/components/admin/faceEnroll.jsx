@@ -182,23 +182,23 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
             onClick={handleClose}
          />
 
-          <h2 className="text-xl font-black uppercase text-zinc-800 dark:text-white mb-2">
+          {/* <h2 className="text-3 font-black capitalize text-zinc-800 dark:text-white mb-2">
             Admin {mode}
-          </h2>
+          </h2> */}
 
           {/* ── Auth method toggle ─────────────────────────────────────── */}
           <div className="flex gap-1 mb-8 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-full">
             <button
               onClick={() => switchMethod("face")}
               className={`px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-widest transition-all
-                ${authMethod === "face" ? 'bg-[#0aaf0a] text-white shadow' : 'text-zinc-500'}`}
+                ${authMethod === "face" ? 'bg-green-400 text-white shadow' : 'text-zinc-500'}`}
             >
               Face
             </button>
             <button
               onClick={() => switchMethod("email")}
               className={`px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-widest transition-all
-                ${authMethod === "email" ? 'bg-[#0aaf0a] text-white shadow' : 'text-zinc-500'}`}
+                ${authMethod === "email" ? 'bg-green-400 text-white shadow' : 'text-zinc-500'}`}
             >
               Email
             </button>
@@ -210,10 +210,10 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
                 {/* Visual Scan Ring */}
                 <div className={`absolute -inset-4 border-2 border-dashed rounded-full ${isScanning ? 'border-green-500 animate-spin-slow' : 'border-zinc-300 opacity-20'}`}></div>
 
-                <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-[#0aaf0a] shadow-[0_0_40px_rgba(10,175,10,0.2)]">
+                <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-green-400 shadow-[0_0_40px_rgba(10,175,10,0.2)]">
                   <video ref={videoRef} autoPlay muted className="w-full h-full object-cover scale-x-[-1]" />
                   {isScanning && (
-                    <div className="absolute top-0 left-0 w-full h-1 bg-[#0aaf0a] shadow-[0_0_15px_#0aaf0a] animate-scan"></div>
+                    <div className="absolute top-0 left-0 w-full h-1 bg-green-400 shadow-[0_0_15px_#0aaf0a] animate-scan"></div>
                   )}
                 </div>
               </div>
@@ -226,7 +226,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
                 onClick={handleEnroll}
                 disabled={isScanning}
                 className={`w-full max-w-xs py-4 rounded-2xl font-black uppercase text-[11px] tracking-widest transition-all shadow-xl
-                    ${isScanning ? 'bg-zinc-200 text-zinc-400 cursor-not-allowed' : 'bg-[#0aaf0a] text-white hover:bg-zinc-900 active:scale-95'}
+                    ${isScanning ? 'bg-zinc-200 text-zinc-400 cursor-not-allowed' : 'bg-green-400 text-white hover:bg-zinc-900 active:scale-95'}
                 `}
               >
                 {isScanning ? "Processing..." : `Confirm ${mode}`}
@@ -240,7 +240,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm text-zinc-800 dark:text-white outline-none focus:border-[#0aaf0a]"
+                className="w-full px-4 py-3 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm text-zinc-800 dark:text-white outline-none focus:border-green-400"
               />
               <input
                 type="password"
@@ -248,7 +248,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm text-zinc-800 dark:text-white outline-none focus:border-[#0aaf0a]"
+                className="w-full px-4 py-3 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm text-zinc-800 dark:text-white outline-none focus:border-green-400"
               />
 
               {emailError && (
@@ -259,7 +259,7 @@ const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) 
                 type="submit"
                 disabled={emailSubmitting}
                 className={`w-full py-4 rounded-2xl font-black uppercase text-[11px] tracking-widest transition-all shadow-xl mt-2
-                    ${emailSubmitting ? 'bg-zinc-200 text-zinc-400 cursor-not-allowed' : 'bg-[#0aaf0a] text-white hover:bg-zinc-900 active:scale-95'}
+                    ${emailSubmitting ? 'bg-zinc-200 text-zinc-400 cursor-not-allowed' : 'bg-green-400 text-white hover:bg-zinc-900 active:scale-95'}
                 `}
               >
                 {emailSubmitting ? "Processing..." : `Confirm ${mode}`}
