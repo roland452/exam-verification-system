@@ -11,7 +11,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
  *  - "face"  → existing face-api.js scan flow
  *  - "email" → plain email + password form
  */
-const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "signup" }) => {
+const FaceEnroll = ({ faceEnrollActive, setFaceEnrollActive, mode = "login" }) => {
 
   const videoRef = useRef();
   const [status, setStatus] = useState("Loading AI Models...");
